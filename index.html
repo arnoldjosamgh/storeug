@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl of Africa Store | Premium Ugandan E-commerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="fa-solid fa-crown"></i> Pearl Store
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fa-solid fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>Discover Uganda's Finest</h1>
+            <p>Premium products delivered to your doorstep.</p>
+        </div>
+    </header>
+
+    <!-- Products Grid -->
+    <main class="container">
+        <h2 class="section-title">Featured Collection</h2>
+        <div id="product-grid" class="product-grid">
+            <!-- Products will be injected here by JS -->
+        </div>
+    </main>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be injected here -->
+            <p class="empty-cart-msg">Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total:</span>
+                <span id="cart-total">0 UGX</span>
+            </div>
+            <button id="checkout-btn" class="btn btn-primary btn-block" onclick="openCheckout()" disabled>Checkout (Min 10 Items)</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="close-btn" onclick="closeCheckout()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkout-form" onsubmit="handlePayment(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" required placeholder="John Doe">
+                    </div>
+                    
+                    <!-- Delivery Section -->
+                    <div class="form-section">
+                        <h3>Delivery</h3>
+                        <div class="form-group">
+                            <label>Distance from Kampala (km)</label>
+                            <input type="number" id="distance-input" min="1" required placeholder="e.g. 5" oninput="calculateDeliveryCost()">
+                            <small>Rate: 700 UGX/km</small>
+                        </div>
+                        <div class="delivery-cost">
+                            Delivery Fee: <span id="delivery-fee">0 UGX</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="form-section">
+                        <h3>Payment Method</h3>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="mtn" checked>
+                                <span class="payment-card mtn">
+                                    <span class="provider-name">MTN MoMo</span>
+                                </span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="airtel">
+                                <span class="payment-card airtel">
+                                    <span class="provider-name">Airtel Money</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="tel" required placeholder="07..." pattern="[0-9]{10}">
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="checkout-subtotal">0 UGX</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery:</span>
+                            <span id="checkout-delivery">0 UGX</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total to Pay:</span>
+                            <span id="checkout-total">0 UGX</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
